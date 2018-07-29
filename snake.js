@@ -149,6 +149,28 @@ function updateSnakePos() {
     }
 }
 
+// Hit with itself
+function hitItself() {
+    for(var i = 0; i < snake.length - 1; i++) {
+	if(snake[snake.length - 1].x == snake[i].x && snake[snake.length - 1].y == snake[i].y) {
+	    alert("Game Over\nScore: " + score);
+	    initNewGame();
+	}
+    }
+}
+
+// Have hit occured
+function hit() {
+    if(snake[snake.length - 1].x < 0 || snake[snake.length - 1].x > canvas.x-section) {
+	alert("Game Over\nScore: " + score);
+	initNewGame();
+    } else if(snake[snake.length - 1].y < 0 || snake[snake.length - 1].y > canvas.y-section) {
+	alert("Game Over\nScore: " + score);
+	initNewGame();
+    }
+    hitItself();
+}
+
 // Main function
 function draw() {
     if(snake[snake.length - 1].dir == "left" && snake[snake.length - 1].x - section == food.x && snake[snake.length - 1].y == food.y ||
@@ -168,6 +190,7 @@ function draw() {
     }
 
     updateSnakePos();
+    hit();
     drawSnake();    
 }
 
